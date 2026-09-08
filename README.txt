@@ -10,5 +10,5 @@ Collin Tullis
 Ethan Cook - EthanCookin
 Ethan Le - 27EthanL
 Kristoffer Roy Comahig - KrisC341
-Maha Jornaz
+Maha Jornaz - Maha- Jor
 Phoenix Brehm - phoenixbrehm
