@@ -48,15 +48,20 @@ class Board:
                 self.__gameState = -1
             elif(self.__board[clickedCellRow][clickedCelCol] == 0):
                 self.__board[clickedCellRow][clickedCelCol] = 2
-                adjCells = self.checkAdjCells(clickedCellRow, clickedCelCol)
-                #if all adjCells
+                adjCells = self.__checkAdjCells(clickedCellRow, clickedCelCol)
+                b = self.numBombNeighbors(adjCells)
+                if(b == 0):
+                    #CLEAR ALL NEIGHBORS UNLESS FALSE FLAG
+                    for i in range(self.getRows()):
+                        for j in range(self.getCols()):
+                            self.setState(i, j)
 
     def hasWon(self):
         if(self.__gameState == -1):
             return -1
 
-        for i in range(self.__rows):
-            for j in range(self.__cols):
+        for i in range(self.getRows):
+            for j in range(self.getCols):
                 if(self.__board[i][j] == 0 or self.__board[i][j] == 1):
                     self.__gameState = 0
                     return 0
@@ -64,7 +69,7 @@ class Board:
         self.__gameState = 1
         return 1
 
-    def checkAdjCells(self, row, col):
+    def __checkAdjCells(self, row, col):
         adjCellMap = [0, 0, 0,
                     0, -2, 0,
                     0, 0, 0] #-2 == self cell, -1 refers to not on grid (used for when cell is adjacent to walls)
