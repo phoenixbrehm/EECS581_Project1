@@ -3,6 +3,7 @@ class Board:
 
 
     def __init__(self, rows: int = 10, cols: int = 10, numMines = -1):
+        """creates the board with member variables rows, cols, numMines, gameState, remainingFlags, and a 2D board itself"""
         self.__rows = rows
         self.__cols = cols
         self.__numMines = numMines #must be user supplied from [10, 20], if not set as -1
@@ -20,7 +21,8 @@ class Board:
         self.__remainingFlags = numMines
 
     def populateBoard(self, clickedCellRow, clickedCellCol):
-        #row is each set of lists
+        """adds a user specified number of mines to the board, to every space other than first click"""
+        #[row][column]
         for i in range(self.__numMines):
             rowMine = random.randint(0, self.getRows()-1)
             colMine = random.randint(0, self.getCols()-1)
@@ -29,7 +31,8 @@ class Board:
             else:
                 self.__board[rowMine][colMine] = 3
 
-    def setState(self, clickedCellRow, clickedCelCol, isFlagging = False): # should be t/f
+    def setState(self, clickedCellRow, clickedCelCol, isFlagging = False): # should be t/f for flagging
+        """updates the states of the cells, checking if flag or no flag, if not flagging a 0 state cell if cell has no bomb neighbors clear all neighbors"""
         if(isFlagging): #if right clicking, handle removing flags on 1 & 4, add flags on 3 and 0, ignore 2's
             if(self.__board[clickedCellRow][clickedCelCol] == 3):
                 self.__board[clickedCellRow][clickedCelCol] = 4
@@ -48,15 +51,15 @@ class Board:
                 self.__gameState = -1
             elif(self.__board[clickedCellRow][clickedCelCol] == 0):
                 self.__board[clickedCellRow][clickedCelCol] = 2
-                adjCells = self.__checkAdjCells(clickedCellRow, clickedCelCol)
-                b = self.numBombNeighbors(adjCells)
+                b = self.numBombNeighbors(clickedCellRow, clickedCelCol)
                 if(b == 0):
-                    #CLEAR ALL NEIGHBORS UNLESS FALSE FLAG
+                    #CLEAR ALL NEIGHBORS UNLESS FALSE FLAG AND CONTINUE FOR EACH 0 ADJACENT
                     for i in range(self.getRows()):
                         for j in range(self.getCols()):
                             self.setState(i, j)
 
     def hasWon(self):
+        """returns the gamestates, if -1 player has lost, if 0 the game is not over, if 1 the player has won"""
         if(self.__gameState == -1):
             return -1
 
@@ -70,6 +73,7 @@ class Board:
         return 1
 
     def __checkAdjCells(self, row, col):
+        """creates and returns a map of the cell states for each adjacent cell of a given cell"""
         adjCellMap = [0, 0, 0,
                     0, -2, 0,
                     0, 0, 0] #-2 == self cell, -1 refers to not on grid (used for when cell is adjacent to walls)
@@ -100,7 +104,9 @@ class Board:
 
         return adjCellMap
                 
-    def numBombNeighbors(self, adjCellList):
+    def numBombNeighbors(self, row, col):
+        """Returns the number of bombs adjacent to a cell, given a cell location"""
+        adjCellList = self.__checkAdjCells(row, col)
         numBombsAdj = 0
         for elem in adjCellList:
             if(elem == 3):
@@ -108,10 +114,23 @@ class Board:
         return numBombsAdj
 
     def getRows(self):
+        """return the number of rows"""
         return self.__rows
     def getCols(self):
+        """return the number of columns"""
         return self.__cols
     def getCellState(self, row, col):
+        """return the state of a cell
+
+        SHOULD PRIMARILY BE USED OUTSIDE OF CLASS ONLY WHEN GAMESTATE = -1 or 1 to display false flags or remaining mine locations, otherwise use numBombNeighbors to display a number on a cell
+
+        0 = Unchecked and no mine
+        1 = Flag (typically a false flag)
+        2 = Checked and no mine
+        3 = Unchecked mine
+        4 = Correctly flagged mine
+        """
         return self.__board[row][col]
     def getNumRemainingFlags(self):
+        """return the number of remaining flags (can go negative for false flags)"""
         return self.__remainingFlags
