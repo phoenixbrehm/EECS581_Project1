@@ -2,7 +2,7 @@ import random
 class Board:
 
 
-    def __init__(self, rows: int = 10, cols: int = 10, numMinesInput = -1):
+    def __init__(self, numMinesInput: int = -1, rows: int = 10, cols: int = 10):
         """creates the board with member variables rows, cols, numMines, gameState, remainingFlags, and a 2D board itself"""
         self.__rows = rows
         self.__cols = cols
@@ -20,7 +20,7 @@ class Board:
         self.__gameState = 0 #0 is neither win or lose, -1 is lose, 1 is win
         self.__remainingFlags = numMinesInput
 
-    def populateBoard(self, clickedCellRow, clickedCellCol):
+    def populateBoard(self, clickedCellRow: int, clickedCellCol: int):
         """adds a user specified number of mines to the board, to every space other than first click"""
         #[row][column]
         for i in range(self.getNumMines()):
@@ -31,7 +31,7 @@ class Board:
             else:
                 self.__board[rowMine][colMine] = 3
 
-    def setState(self, clickedCellRow, clickedCelCol, isFlagging = False): # should be t/f for flagging
+    def setState(self, clickedCellRow: int, clickedCelCol: int, isFlagging: bool = False): # should be t/f for flagging
         """updates the states of the cells, checking if user input is flag or no flag.
         if not flagging and a 0 state cell: if cell has no bomb neighbors clear all neighbors"""
         if(isFlagging): #if right clicking, handle removing flags on 1 & 4, add flags on 3 and 0, ignore 2's
@@ -73,7 +73,7 @@ class Board:
         self.__gameState = 1
         return 1
 
-    def __checkAdjCells(self, row, col):
+    def __checkAdjCells(self, row: int, col: int):
         """creates and returns a map of the cell states for each adjacent cell of a given cell"""
         adjCellMap = [0, 0, 0,
                     0, -2, 0,
@@ -105,7 +105,7 @@ class Board:
 
         return adjCellMap
                 
-    def numBombNeighbors(self, row, col):
+    def numBombNeighbors(self, row: int, col: int):
         """Returns the number of bombs adjacent to a cell, given a cell location"""
         adjCellList = self.__checkAdjCells(row, col)
         numBombsAdj = 0
@@ -120,7 +120,7 @@ class Board:
     def getCols(self):
         """return the number of columns"""
         return self.__cols
-    def getCellState(self, row, col):
+    def getCellState(self, row: int, col: int):
         """return the state of a cell
 
         SHOULD PRIMARILY BE USED OUTSIDE OF CLASS ONLY WHEN GAMESTATE = -1 or 1 to display false flags or remaining mine locations, otherwise use numBombNeighbors to display a number on a cell
