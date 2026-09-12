@@ -22,8 +22,8 @@ class Board:
     def populateBoard(self, clickedCellRow, clickedCellCol):
         #row is each set of lists
         for i in range(self.__numMines):
-            rowMine = random.randint(0, self.__rows-1)
-            colMine = random.randint(0, self.__cols-1)
+            rowMine = random.randint(0, self.getRows()-1)
+            colMine = random.randint(0, self.getCols()-1)
             if(rowMine == clickedCellRow and colMine == clickedCellCol and self.__board[rowMine][colMine] == 3):
                 i = i - 1
             else:
@@ -47,7 +47,9 @@ class Board:
             if(self.__board[clickedCellRow][clickedCelCol] == 3):
                 self.__gameState = -1
             elif(self.__board[clickedCellRow][clickedCelCol] == 0):
-                pass
+                self.__board[clickedCellRow][clickedCelCol] = 2
+                adjCells = self.checkAdjCells(clickedCellRow, clickedCelCol)
+                #if all adjCells
 
     def hasWon(self):
         if(self.__gameState == -1):
@@ -61,6 +63,44 @@ class Board:
         
         self.__gameState = 1
         return 1
+
+    def checkAdjCells(self, row, col):
+        adjCellMap = [0, 0, 0,
+                    0, -2, 0,
+                    0, 0, 0] #-2 == self cell, -1 refers to not on grid (used for when cell is adjacent to walls)
+        if(row == 0):
+            adjCellMap[0] = -1
+            adjCellMap[1] = -1
+            adjCellMap[2] = -1
+        elif(row == self.getRows()-1):
+            adjCellMap[6] = -1
+            adjCellMap[7] = -1
+            adjCellMap[8] = -1
+        if(col == 0):
+            adjCellMap[0] = -1
+            adjCellMap[3] = -1
+            adjCellMap[6] = -1
+        elif(col == self.getCols()-1):
+            adjCellMap[2] = -1
+            adjCellMap[5] = -1
+            adjCellMap[8] = -1
+
+
+        #0 = row-1, col-1
+        #1 = row-1
+        #2 = row-1, col+1
+        for i in range(9):
+            if(adjCellMap[i] == 0):
+                adjCellMap[i] = self.getCellState(row+((i//3)-1), col+((i%3)-1))
+
+        return adjCellMap
+                
+    def numBombNeighbors(self, adjCellList):
+        numBombsAdj = 0
+        for elem in adjCellList:
+            if(elem == 3):
+                numBombsAdj += 1
+        return numBombsAdj
 
     def getRows(self):
         return self.__rows
