@@ -2,11 +2,11 @@ import random
 class Board:
 
 
-    def __init__(self, rows: int = 10, cols: int = 10, numMines = -1):
+    def __init__(self, rows: int = 10, cols: int = 10, numMinesInput = -1):
         """creates the board with member variables rows, cols, numMines, gameState, remainingFlags, and a 2D board itself"""
         self.__rows = rows
         self.__cols = cols
-        self.__numMines = numMines #must be user supplied from [10, 20], if not set as -1
+        self.__numMines = numMinesInput #must be user supplied from [10, 20], if not set as -1
 
         """
         Board Cell State Definitions:
@@ -18,38 +18,39 @@ class Board:
         """
         self.__board = [[0] * self.__rows] * self.__cols #populate board with 0's
         self.__gameState = 0 #0 is neither win or lose, -1 is lose, 1 is win
-        self.__remainingFlags = numMines
+        self.__remainingFlags = numMinesInput
 
     def populateBoard(self, clickedCellRow, clickedCellCol):
         """adds a user specified number of mines to the board, to every space other than first click"""
         #[row][column]
-        for i in range(self.__numMines):
+        for i in range(self.getNumMines()):
             rowMine = random.randint(0, self.getRows()-1)
             colMine = random.randint(0, self.getCols()-1)
-            if((rowMine == clickedCellRow and colMine == clickedCellCol) or self.__board[rowMine][colMine] == 3):
+            if((rowMine == clickedCellRow and colMine == clickedCellCol) or self.getCellState(clickedCellRow, clickedCellCol) == 3):
                 i = i - 1
             else:
                 self.__board[rowMine][colMine] = 3
 
     def setState(self, clickedCellRow, clickedCelCol, isFlagging = False): # should be t/f for flagging
-        """updates the states of the cells, checking if flag or no flag, if not flagging a 0 state cell if cell has no bomb neighbors clear all neighbors"""
+        """updates the states of the cells, checking if user input is flag or no flag.
+        if not flagging and a 0 state cell: if cell has no bomb neighbors clear all neighbors"""
         if(isFlagging): #if right clicking, handle removing flags on 1 & 4, add flags on 3 and 0, ignore 2's
-            if(self.__board[clickedCellRow][clickedCelCol] == 3):
+            if(self.getCellState(clickedCellRow, clickedCelCol) == 3):
                 self.__board[clickedCellRow][clickedCelCol] = 4
                 self.__remainingFlags -= 1
-            elif(self.__board[clickedCellRow][clickedCelCol] == 4):
+            elif(self.getCellState(clickedCellRow, clickedCelCol) == 4):
                 self.__board[clickedCellRow][clickedCelCol] = 3
                 self.__remainingFlags += 1
-            elif(self.__board[clickedCellRow][clickedCelCol] == 1):
+            elif(self.getCellState(clickedCellRow, clickedCelCol) == 1):
                 self.__board[clickedCellRow][clickedCelCol] = 0
                 self.__remainingFlags += 1
-            elif(self.__board[clickedCellRow][clickedCelCol] == 0):
+            elif(self.getCellState(clickedCellRow, clickedCelCol) == 0):
                 self.__board[clickedCellRow][clickedCelCol] = 1
                 self.__remainingFlags -= 1
         else: #if left clicking, only handle clicking on 0 or 3, ignore clicks on 1 2 4
-            if(self.__board[clickedCellRow][clickedCelCol] == 3):
+            if(self.getCellState(clickedCellRow, clickedCelCol) == 3):
                 self.__gameState = -1
-            elif(self.__board[clickedCellRow][clickedCelCol] == 0):
+            elif(self.getCellState(clickedCellRow, clickedCelCol) == 0):
                 self.__board[clickedCellRow][clickedCelCol] = 2
                 b = self.numBombNeighbors(clickedCellRow, clickedCelCol)
                 if(b == 0):
@@ -65,7 +66,7 @@ class Board:
 
         for i in range(self.getRows):
             for j in range(self.getCols):
-                if(self.__board[i][j] == 0 or self.__board[i][j] == 1):
+                if(self.getCellState(i, j) == 0 or self.getCellState(i, j) == 1):
                     self.__gameState = 0
                     return 0
         
@@ -134,3 +135,5 @@ class Board:
     def getNumRemainingFlags(self):
         """return the number of remaining flags (can go negative for false flags)"""
         return self.__remainingFlags
+    def getNumMines(self):
+        return self.__numMines
