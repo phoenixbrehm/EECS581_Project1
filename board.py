@@ -26,7 +26,7 @@ class Board:
         for i in range(self.__numMines):
             rowMine = random.randint(0, self.getRows()-1)
             colMine = random.randint(0, self.getCols()-1)
-            if(rowMine == clickedCellRow and colMine == clickedCellCol and self.__board[rowMine][colMine] == 3):
+            if((rowMine == clickedCellRow and colMine == clickedCellCol) or self.__board[rowMine][colMine] == 3):
                 i = i - 1
             else:
                 self.__board[rowMine][colMine] = 3
