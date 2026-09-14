@@ -16,7 +16,7 @@ class Board:
         3 = Unchecked mine
         4 = Correctly flagged mine
         """
-        self.__board = [[0] * self.__rows] * self.__cols #populate board with 0's
+        self.__board = [[0 for _ in range(self.__cols)] for _ in range(self.__rows)] #populate board with 0's
         self.__gameState = 0 #0 is neither win or lose, -1 is lose, 1 is win
         self.__remainingFlags = numMinesInput
 
