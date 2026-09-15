@@ -55,17 +55,24 @@ class Board:
                 b = self.numBombNeighbors(clickedCellRow, clickedCelCol)
                 if(b == 0):
                     #CLEAR ALL NEIGHBORS UNLESS FALSE FLAG AND CONTINUE FOR EACH 0 ADJACENT
-                    for i in range(self.getRows()):
-                        for j in range(self.getCols()):
-                            self.setState(i, j)
+                    #clear row-1 col-1
+                    #clear row-1 col
+                    for i in range(9):
+                        checkRow = clickedCellRow+((i//3)-1)
+                        checkCol = clickedCelCol+((i%3)-1)
+                        if checkRow < 0 or checkCol < 0 or checkRow > self.getRows()-1 or checkCol > self.getCols()-1:
+                            continue
+                        else:
+                            self.setState(checkRow, checkCol)
+                            print(self)
 
     def hasWon(self):
         """returns the gamestates, if -1 player has lost, if 0 the game is not over, if 1 the player has won"""
         if(self.__gameState == -1):
             return -1
 
-        for i in range(self.getRows):
-            for j in range(self.getCols):
+        for i in range(self.getRows()):
+            for j in range(self.getCols()):
                 if(self.getCellState(i, j) == 0 or self.getCellState(i, j) == 1):
                     self.__gameState = 0
                     return 0
@@ -137,3 +144,15 @@ class Board:
         return self.__remainingFlags
     def getNumMines(self):
         return self.__numMines
+    def __repr__(self):
+        print("   ABCDEFGHIJ")
+        for i in range(self.getRows()):
+            print(i+1, end="")
+            if i == 9:
+                print(" ", end="")
+            else:
+                print("  ", end="")
+            for j in range(self.getCols()):
+                print(self.__board[i][j], end="")
+            print("")
+        return ""
