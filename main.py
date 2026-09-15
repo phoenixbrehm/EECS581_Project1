@@ -53,6 +53,7 @@ def main():
         result = myBoard.hasWon()
         if(result == -1):
             print("Game Over: You Lost.\nTry again?\n")
+            ui.print_board(True)
             #print board (can be done hopefully painlessly with numBombNeighbors in board class)
             #but this time display all mines and false flags, but keep covered spaces properly covered, likely done with getCellState in board class
         elif(result == 1):
