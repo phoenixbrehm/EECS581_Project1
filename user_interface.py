@@ -8,9 +8,13 @@ class User_Interface:
         self.board = [['X' for _ in range(self.cols)] for _ in range(self.rows)]
 
     def print_board(self):
-        print("- " * (self.rows+1))
+        print("   A B C D E F G H I J\n  ",end="")
+        print(" -" * (self.rows+1))
         for row in range(self.rows):
-            row_string = "|"
+            row_string = str(row+1)
+            if(row != 9):
+                row_string += " "
+            row_string += "|"
             for col in range(self.cols):
                 state = self.myBoard.getCellState(row, col)
                 if state == 0 or state == 3: #unchecked spot
@@ -24,4 +28,5 @@ class User_Interface:
                         row_string += "  "
             row_string += "|"
             print(row_string)
-        print("- " * (self.rows+1))
+        print("  ", end="")
+        print(" -" * (self.rows+1))
