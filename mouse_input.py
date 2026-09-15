@@ -12,7 +12,7 @@ Image must be resized because it would scale the button the image size instead.
 button_image makes use of the resized image.
 blank_image is used to make the buttons blank at the start of the game, but also makes it so the width and height parameters are in pixels.
 """
-original_image = Image.open("EECS581_Project1/images/MINESWEEPER_FLAG.png")
+original_image = Image.open("images/MINESWEEPER_FLAG.png")
 resized_image = original_image.resize((32, 32), Image.Resampling.NEAREST)
 button_image = ImageTk.PhotoImage(resized_image)
 blank_image = tk.PhotoImage(width=1, height=1)
