@@ -23,13 +23,15 @@ class Board:
     def populateBoard(self, clickedCellRow: int, clickedCellCol: int):
         """adds a user specified number of mines to the board, to every space other than first click"""
         #[row][column]
-        for i in range(self.getNumMines()):
+        minesplaced = 0
+        while(minesplaced < self.getNumMines()):
             rowMine = random.randint(0, self.getRows()-1)
             colMine = random.randint(0, self.getCols()-1)
-            if((rowMine == clickedCellRow and colMine == clickedCellCol) or self.getCellState(clickedCellRow, clickedCellCol) == 3):
-                i = i - 1
+            if((rowMine == clickedCellRow and colMine == clickedCellCol) or self.getCellState(rowMine, colMine) == 3):
+                continue
             else:
                 self.__board[rowMine][colMine] = 3
+                minesplaced += 1
 
     def setState(self, clickedCellRow: int, clickedCelCol: int, isFlagging: bool = False): # should be t/f for flagging
         """updates the states of the cells, checking if user input is flag or no flag.
