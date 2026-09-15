@@ -1,5 +1,6 @@
 from board import Board
 from input_handler import get_input
+from user_interface import User_Interface
 def main():
     while(True):
         print("Welcome to Minesweeper!")
@@ -10,6 +11,7 @@ def main():
             mines = int(uInput)
             if(mines >= 10 and mines <= 20):
                 myBoard = Board(mines)
+                ui = User_Interface(myBoard)
                 print("Start playing")
             else:
                 raise ValueError #intended value error for when user inputs values less than 10 or greater than 20
@@ -18,7 +20,7 @@ def main():
             continue
 
 
-
+        ui.print_board()
         #wait for user to input on a cell (only allow left click, no flag for first click)
         #print board (can be done hopefully painlessly with numBombNeighbors in board class)
         while True:
@@ -32,9 +34,8 @@ def main():
                 print("Only a left click is allowed for your first move Try again")
                 inputSelect = get_input()
         myBoard.populateBoard(inputSelect[0], inputSelect[1])
-        print(myBoard)
         myBoard.setState(inputSelect[0], inputSelect[1])
-        print(myBoard)
+        ui.print_board()
 
 
         while(myBoard.hasWon() == 0):
@@ -46,7 +47,7 @@ def main():
 
             #print board (can be done hopefully painlessly with numBombNeighbors in board class)
             myBoard.setState(inputSelect[0], inputSelect[1], inputSelect[2])
-            print(myBoard)
+            ui.print_board()
 
 
         result = myBoard.hasWon()
