@@ -119,7 +119,7 @@ class Board:
         adjCellList = self.__checkAdjCells(row, col)
         numBombsAdj = 0
         for elem in adjCellList:
-            if(elem == 3):
+            if(elem == 3 or elem == 4):
                 numBombsAdj += 1
         return numBombsAdj
 
