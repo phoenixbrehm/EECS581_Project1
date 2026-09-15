@@ -1,4 +1,5 @@
 from board import Board
+from input_handler import get_input
 def main():
     while(True):
         print("Welcome to Minesweeper!")
@@ -12,14 +13,29 @@ def main():
                 print("Start playing")
                 #wait for user to input on a cell (only allow left click, no flag for first click)
                 #print board (can be done hopefully painlessly with numBombNeighbors in board class)
-                myBoard.populateBoard(clickrow, clickcol)
-                myBoard.setState(clickrow, clickcol)
+                while True:
+                    inputSelect = get_input()
+                    if inputSelect[0] != -1:
+                        break
+                while True:
+                    if not inputSelect[2]:
+                        break
+                    else:
+                        print("Only a left click is allowed for your first move Try again")
+                        inputSelect = get_input()
+                myBoard.populateBoard(inputSelect[0], inputSelect[1])
+                myBoard.setState(inputSelect[0], inputSelect[1])
 
 
                 while(myBoard.hasWon() == 0):
                     #wait for user to input on a cell
+                    while True:
+                        inputSelect = get_input()
+                        if inputSelect[0] != -1:
+                            break
+
                     #print board (can be done hopefully painlessly with numBombNeighbors in board class)
-                    myBoard.setState(clickrow, clickcol, flaggingState)
+                    myBoard.setState(inputSelect[0], inputSelect[1], inputSelect[2])
 
 
                 result = myBoard.hasWon()
