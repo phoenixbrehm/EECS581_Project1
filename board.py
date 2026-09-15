@@ -64,7 +64,7 @@ class Board:
                             continue
                         else:
                             self.setState(checkRow, checkCol)
-                            print(self)
+                            #print(self) debug line
 
     def hasWon(self):
         """returns the gamestates, if -1 player has lost, if 0 the game is not over, if 1 the player has won"""
