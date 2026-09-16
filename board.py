@@ -2,7 +2,7 @@
 """
 Author: Phoenix Brehm and Carson Schraad, Created 9/10/26
 Last updated: 9/15/26 - by Phoenix Brehm
-Code is authored by Phoenix Brehm, with Carson Schraad creating the function prototype alongside member variables rows and cols for __init__ with Claude as a co-author
+Code is authored by Phoenix Brehm, with Carson Schraad creating the function prototype alongside member variables rows and cols for __init__ with Claude as a co-author (used the ai to assist in pushing the change made to the github) see AI disclosure document on usage for this file
 Board Class
 The goal of the board class is to implement functions that manage the board
 Functions implemented are:
