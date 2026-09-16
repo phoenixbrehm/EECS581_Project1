@@ -8,6 +8,7 @@ class User_Interface:
         self.board = [['X' for _ in range(self.cols)] for _ in range(self.rows)]
 
     def print_board(self,loss = False):
+        print("   Remaining Flags:", self.myBoard.getNumRemainingFlags())
         print("   A B C D E F G H I J\n  ",end="")
         print(" -" * (self.rows+1))
         for row in range(self.rows):
