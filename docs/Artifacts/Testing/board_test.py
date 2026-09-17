@@ -1,5 +1,6 @@
 from board import Board
 import random
+from input_handler import get_input
 
 # Board __init__ test
 test = Board(10)
@@ -86,5 +87,36 @@ c = int(input("Please provide col: "))
 test.setState(r, c, False)
 print(test._Board__board)
 
+print("\n-------- __checkAdjCells() --------")
 
+#__checkAdjCells() tests
+#checking cell states of out of bounds neighbors
+#out of bounds neighbors should have state -1
 
+print("Tests 1: bottom row neighbor states") #test case to check neighbor states of all bottom row cells, neighbors below should have state -1
+i = 0
+for i in range(10):
+    print("cell neighbor states, col ", str(i), ": ", test._Board__checkAdjCells(9, i)) 
+
+print("\nTests 2: top row neighbor states") #test case to check neighbor states of all top row cells, neighbors below should have state -1
+i = 0
+for i in range(10):
+    print("cell neighbor states, col ", str(i), ": ", test._Board__checkAdjCells(0, i))
+
+print("\nTests 3: left column neighbor states") #test case to check neighbor states for all left column cells, neighbors to the left should have state -1
+i = 0
+for i in range(10):
+     print("cell neighbor states, row ", str(i), ": ", test._Board__checkAdjCells(i, 0))
+
+print("\nTests 4: right column neighbor states") #test case to check neighbor states for all right column cells, neighbors to the right should have state -1
+i = 0
+for i in range(10):
+     print("cell neighbor states, row ", str(i), ": ", test._Board__checkAdjCells(i, 9))
+
+print("\n-------- get_input() --------")
+
+#get_input() tests
+
+for i in range(6):
+    print("\nTest ", str(i+1), ":")
+    get_input() #manual test case to check handling of invalid inputs
