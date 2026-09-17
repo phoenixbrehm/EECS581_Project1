@@ -116,6 +116,7 @@ for i in range(10):
 print("\n-------- get_input() --------")
 
 #get_input() tests
+#checking for invalid inputs
 
 for i in range(6):
     print("\nTest ", str(i+1), ":")
