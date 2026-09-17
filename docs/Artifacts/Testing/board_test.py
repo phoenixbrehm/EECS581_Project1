@@ -98,7 +98,7 @@ i = 0
 for i in range(10):
     print("cell neighbor states, col ", str(i), ": ", test._Board__checkAdjCells(9, i)) 
 
-print("\nTests 2: top row neighbor states") #test case to check neighbor states of all top row cells, neighbors below should have state -1
+print("\nTests 2: top row neighbor states") #test case to check neighbor states of all top row cells, neighbors above should have state -1
 i = 0
 for i in range(10):
     print("cell neighbor states, col ", str(i), ": ", test._Board__checkAdjCells(0, i))
