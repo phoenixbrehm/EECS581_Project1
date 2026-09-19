@@ -12,10 +12,10 @@ A 10x10 grid filled with a user specified number of mines which the player can f
 
 | Team Members | Roles | Github |
 | :---: | :---: | :---: |
-| Carson Schraad |  | CarsonSchraad |
-| Collin Tullis |  | monrester |
+| Carson Schraad | Co-Scrum Master | CarsonSchraad |
+| Collin Tullis | UI/UX Designer | monrester |
 | Ethan Cook | Quality Assurance | EthansCookin |
-| Ethan Le |  | 27EthanL |
+| Ethan Le | Configuration (Version Control) Manager | 27EthanL |
 | Kristoffer Roy Comahig | Technical Writer & Quality Assurance | KrisC341 |
-| Maha Jornaz | Project Leader | Maha-Jor |
+| Maha Jornaz | Project Manager | Maha-Jor |
 | Phoenix Brehm | Technical Lead | phoenixbrehm |
