@@ -18,4 +18,4 @@ A 10x10 grid filled with a user specified number of mines which the player can f
 | Ethan Le |  | 27EthanL |
 | Kristoffer Roy Comahig |  | KrisC341 |
 | Maha Jornaz | Project Leader | Maha-Jor |
-| Phoenix Brehm |  | phoenixbrehm |
+| Phoenix Brehm | Technical Lead | phoenixbrehm |
