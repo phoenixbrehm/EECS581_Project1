@@ -14,7 +14,7 @@ A 10x10 grid filled with a user specified number of mines which the player can f
 | :---: | :---: | :---: |
 | Carson Schraad |  | CarsonSchraad |
 | Collin Tullis |  | monrester |
-| Ethan Cook |  | EthansCookin |
+| Ethan Cook | Quality Assurance | EthansCookin |
 | Ethan Le |  | 27EthanL |
 | Kristoffer Roy Comahig |  | KrisC341 |
 | Maha Jornaz | Project Leader | Maha-Jor |
