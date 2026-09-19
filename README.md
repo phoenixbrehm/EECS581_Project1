@@ -16,6 +16,6 @@ A 10x10 grid filled with a user specified number of mines which the player can f
 | Collin Tullis |  | monrester |
 | Ethan Cook | Quality Assurance | EthansCookin |
 | Ethan Le |  | 27EthanL |
-| Kristoffer Roy Comahig |  | KrisC341 |
+| Kristoffer Roy Comahig | Technical Writer & Quality Assurance | KrisC341 |
 | Maha Jornaz | Project Leader | Maha-Jor |
 | Phoenix Brehm | Technical Lead | phoenixbrehm |
