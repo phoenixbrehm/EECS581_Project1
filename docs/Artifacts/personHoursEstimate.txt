@@ -1,0 +1,8 @@
+Name			Job (est. hours)
+Carson Schraad: 	QA and Testing (3), Disclosure Doc (1)
+Collin Tullis: 		User Interface (2)
+Ethan Cook: 		QA and Testing (3)
+Ethan Le: 		QA and Testing (3)
+Kristoffer Roy Comahig:	QA and Testing (3), Architecture Documentation (2)
+Maha Jornaz: 		User input (3)
+Phoenix Brehm: 		Board manager (3), Game loop (2)
